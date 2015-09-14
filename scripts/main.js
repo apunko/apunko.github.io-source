@@ -26,17 +26,6 @@ $(function() {
     position = position+10;
   }
 
-  $("#search").keyup(function (event) {
-    if (event.keyCode == 13) {
-      $("#search").blur();
-      searchInformation();
-    }
-  });
-
-  $("button").click(function () {
-    searchInformation();
-  });
-
   function searchInformation() {
     var keyword = $("#search").val();
     $("#SearchResult").html("");
@@ -47,6 +36,17 @@ $(function() {
       searchRepositories(keyword);
     }
   }
+
+  $("#search").keyup(function (event) {
+    if (event.keyCode == 13) {
+      $("#search").blur();
+      searchInformation();
+    }
+  });
+
+  $("button").click(function () {
+    searchInformation();
+  });
 
   function makeHttpCall(url, login, follow_type) {
     var xhr = new XMLHttpRequest();
@@ -97,10 +97,10 @@ $(function() {
       if(!error) {    
         response.each(function (user) {
           if (user != null) {
-            var currentUser = new Gh3.User(user.login);
-            currentUser.fetch(function (error, information){
+            var user1 = new Gh3.User(user.login);
+            user1.fetch(function (error, resUser){
               if(!error) {
-                global[i] = makeInformationObject(information);
+                global[i] = makeInformationObject(resUser);
                 if (position < 10) {
                   showUserItem(global[i], i);
                   $(".user").last().click(usersHandler);
