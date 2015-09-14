@@ -28,6 +28,17 @@ $(function() {
             $("#nextLink").css("visibility", "visible");
     });
 
+    $("#search").keyup(function (event) {
+        if (event.keyCode == ENTER) {
+            $("#search").blur();
+            searchInformation();
+        }
+    });
+
+    $("button").click(function () {
+       searchInformation();
+    });
+
     function displayNewPage() {
         $("#SearchResult").html("");
         showTen(PAGINATION_VALUE);
@@ -45,52 +56,38 @@ $(function() {
         }
     }
 
-    $("#search").keyup(function (event) {
-        if (event.keyCode == ENTER) {
-            $("#search").blur();
-            searchInformation();
-        }
-    });
-
-    $("button").click(function () {
-       searchInformation();
-    });
-
-    function makeHttpCall(url, login, follow_type) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url + addKeys(), true);
-        xhr.send();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState != READY_STATE) return;
-            if (xhr.status != OK_RESPONSE) {
-                showFailSignal(login, follow_type);
+    function makeHttpCall(url, login, followType) {
+        var request = new XMLHttpRequest();
+        request.open('GET', url + addKeys(), true);
+        request.send();
+        request.onreadystatechange = function() {
+            if (request.readyState != READY_STATE) return;
+            if (request.status != OK_RESPONSE) {
+                showFailSignal(login, followType);
             } else {
-                showHttpResponse(JSON.parse(xhr.responseText), login, follow_type);
+                showHttpResponse(JSON.parse(request.responseText), login, followType);
             }
         }
     }
 
-    function beforeSearchInit(type) {
+    function beforeSearchInitialization(type) {
         searchType = type;
         searchAdditionalInformationItems = [];
         nextItemPositionToShow = 0;
+        $("#nextLink").css("visibility", "hidden");
+        $("#backLink").css("visibility", "hidden");
+
     }
 
     function searchRepositories(keyword) {
-        beforeSearchInit("repositories");
+        beforeSearchInitialization("repositories");
         var i = 0;
         Gh3.Repositories.search(keyword, {start_page : 1}, function (err, res) {
             if(!err) { 
                 Gh3.Repositories.each(function (repository) {
                   if (repository != null) {
                       searchAdditionalInformationItems[i] = makeInformationRepoObject(repository);
-                      if (nextItemPositionToShow < PAGINATION_VALUE) {
-                          showRepoItem(searchAdditionalInformationItems[i], i);
-                          $(".repo").last().click(showInformation);
-                          nextItemPositionToShow++;
-                      } else if (nextItemPositionToShow == PAGINATION_VALUE && i == PAGINATION_VALUE) {
-                          $("#nextLink").css("visibility", "visible");
-                      }
+                      showItemIfNeed(showRepoItem, ".repo", i);
                       i++;
                   }
               });
@@ -99,10 +96,9 @@ $(function() {
     }
 
     function searchUsers(keyword) {
-        beforeSearchInit("users");
+        beforeSearchInitialization("users");
         var i = 0;
         Gh3.Users.search(keyword, {start_page : 1}, function (error, response) {
-            var userNumber = 0;
             if(!error) {    
                 response.each(function (user) {
                   if (user != null) {
@@ -110,14 +106,8 @@ $(function() {
                       currentUser.fetch(function (error, information){
                           if(!error) {
                               searchAdditionalInformationItems[i] = makeInformationObject(information);
-                              if (nextItemPositionToShow < PAGINATION_VALUE) {
-                                  showUserItem(searchAdditionalInformationItems[i], i);
-                                  $(".user").last().click(showInformation);
-                                  nextItemPositionToShow++;
-                              } else if (nextItemPositionToShow == PAGINATION_VALUE && i == PAGINATION_VALUE) {
-                                  $("#nextLink").css("visibility", "visible");
-                              }
-                              i++;
+                              showItemIfNeed(showUserItem, ".user", i);
+                              i++;                            
                           }
                       });
                   }
@@ -126,6 +116,15 @@ $(function() {
         });
     }
 
+    function showItemIfNeed(showItem, itemClass, i) {
+      if (nextItemPositionToShow < PAGINATION_VALUE) {
+          showItem(searchAdditionalInformationItems[i], i);
+          $(itemClass).last().click(showInformation);
+          nextItemPositionToShow++;
+      } else if (nextItemPositionToShow == PAGINATION_VALUE && i == PAGINATION_VALUE) {
+          $("#nextLink").css("visibility", "visible");
+      } 
+    }
 
     function showHttpResponse(response, login, follow_type) {
         var ulContainer = $("ul." + login + "." + follow_type);
@@ -134,8 +133,8 @@ $(function() {
         }
     }
 
-    function showFailSignal(login, follow_type) {
-        var ulContainer = $("ul." + login + "." + follow_type).text("can't load");
+    function showFailSignal(login, followType) {
+        var ulContainer = $("ul." + login + "." + followType).text("can't load");
     }
 
     function makeFollowTypeList(url, login, follow_type){
@@ -157,8 +156,8 @@ $(function() {
         if ($(this).children().length > 0) {
             $(this).children().remove();
         } else {
-            $(this).append($('<div class="additionalInformation">')
-                .append(showAdditionalInformation(searchAdditionalInformationItems[i])));
+            $(this).append($('<div class="additionalInformation">').
+                append(showAdditionalInformation(searchAdditionalInformationItems[i])));
         }
     }
 
@@ -215,26 +214,26 @@ $(function() {
 
     function showUserItem(item, nextItemPositionToShow){
         $("#SearchResult").append($("<li>").append(
-            $('<span class="user">').attr("id", nextItemPositionToShow)
-                .text(item.login)
+            $('<span class="user">').attr("id", nextItemPositionToShow).
+                text(item.login)
         ));
     }
 
     function showRepoItem(item, nextItemPositionToShow){
         $("#SearchResult").append($("<li>").append(
-          $('<span class="repo">').attr("id", nextItemPositionToShow)
-              .text(item.name)
+          $('<span class="repo">').attr("id", nextItemPositionToShow).
+              text(item.name)
         ));
     }
 
     function showUserInformation(information) {
         var informationContainer = $("<div>");
-        informationContainer.append($("<div>").text("login : " + information.login))
-                            .append($("<div>").text("name : " + information.name))
-                            .append($("<div>").text("followers : " + information.followers_amount))
-                            .append(makeFollowTypeList(information.followers_url, information.login, "followes"))
-                            .append($("<div>").text("following :" + information.following_amount))
-                            .append(makeFollowTypeList(information.following_url, information.login, "following"));
+        informationContainer.append($("<div>").text("login : " + information.login)).
+            append($("<div>").text("name : " + information.name)).
+            append($("<div>").text("followers : " + information.followers_amount)).
+            append(makeFollowTypeList(information.followers_url, information.login, "followes")).
+            append($("<div>").text("following : " + information.following_amount)).
+            append(makeFollowTypeList(information.following_url, information.login, "following"));
         return informationContainer;
     }
 
