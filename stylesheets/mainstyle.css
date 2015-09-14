@@ -1,0 +1,26 @@
+img {
+  height: 50px;
+  width: 50px;
+}
+
+span.user {
+  color: blue;
+  cursor: pointer;
+}
+
+span.repo {
+  color: blue;
+  cursor: pointer;
+}
+
+span.repo div {
+  color: black;
+}
+
+span.user div {
+  color: black;
+}
+
+a {
+  color: blue;
+}
