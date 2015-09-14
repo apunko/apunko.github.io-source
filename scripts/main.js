@@ -1,29 +1,34 @@
 $(function() {
-  var global = [];
+  var searchAdditionalInformationItems = [];
   var position = 0;
   var search_type = "users";
+  var READY_STATE = 4;
+  var PAGINATION_VALUE = 10;
+  var DOUBLE_PAGINATION_VALUE = 20;
+  var OK_RESPONSE = 200;
+  var ENTER = 13;
   $("#nextLink").css("visibility", "hidden");
   $("#backLink").css("visibility", "hidden");
 
 
   $("#nextLink").click(function () {
     displayNewPage();
-    if (position > 10) $("#backLink").css("visibility", "visible");
-    if (position >= global.length) $("#nextLink").css("visibility", "hidden");
+    if (position > PAGINATION_VALUE) $("#backLink").css("visibility", "visible");
+    if (position >= searchAdditionalInformationItems.length) $("#nextLink").css("visibility", "hidden");
   });
 
   $("#backLink").click(function () {
-    position = position-20;
+    position = position - DOUBLE_PAGINATION_VALUE;
     displayNewPage();
-    if (position <= 10) $("#backLink").css("visibility", "hidden");
-    if (position < global.length) $("#nextLink").css("visibility", "visible");
+    if (position <= PAGINATION_VALUE) $("#backLink").css("visibility", "hidden");
+    if (position < searchAdditionalInformationItems.length) $("#nextLink").css("visibility", "visible");
   });
 
   function displayNewPage() {
     $("#SearchResult").html("");
-    showTen(10);
-    init();
-    position = position+10;
+    showTen(PAGINATION_VALUE);
+    initClickEvents();
+    position = position + PAGINATION_VALUE;
   }
 
   function searchInformation() {
@@ -38,7 +43,7 @@ $(function() {
   }
 
   $("#search").keyup(function (event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode == ENTER) {
       $("#search").blur();
       searchInformation();
     }
@@ -53,8 +58,8 @@ $(function() {
     xhr.open('GET', url + addKeys(), true);
     xhr.send();
     xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) return;
-      if (xhr.status != 200) {
+      if (xhr.readyState != READY_STATE) return;
+      if (xhr.status != OK_RESPONSE) {
         showFailSignal(login, follow_type);
       } else {
         showHttpResponse(JSON.parse(xhr.responseText), login, follow_type);
@@ -62,22 +67,26 @@ $(function() {
     }
   }
 
-  function searchRepositories(keyword) {
-    search_type = "repositories";
-    global = [];
+  function beforeSearchInit(type) {
+    search_type = type;
+    searchAdditionalInformationItems = [];
     position = 0;
+  }
+
+  function searchRepositories(keyword) {
+    beforeSearchInit("repositories");
     var i = 0;
     Gh3.Repositories.search(keyword, {start_page : 1}, function (err, res) {
       if(!err) { 
         Gh3.Repositories.each(function (repository) {
           if (repository != null) {
-            global[i] = makeInformationRepoObject(repository);
-            if (position < 10) {
-              showRepoItem(global[i], i);
-              $(".repo").last().click(reposHandler);
+            searchAdditionalInformationItems[i] = makeInformationRepoObject(repository);
+            if (position < PAGINATION_VALUE) {
+              showRepoItem(searchAdditionalInformationItems[i], i);
+              $(".repo").last().click(showInformation);
               position++;
             }
-            else if (position == 10 && i == 10) {
+            else if (position == PAGINATION_VALUE && i == PAGINATION_VALUE) {
               $("#nextLink").css("visibility", "visible");
             }
             i++;
@@ -88,25 +97,23 @@ $(function() {
   }
 
   function searchUsers(keyword) {
-    search_type = "users";
-    global = [];
-    position = 0;
+    beforeSearchInit("users");
     var i = 0;
     Gh3.Users.search(keyword, {start_page : 1}, function (error, response) {
       var userNumber = 0;
       if(!error) {    
         response.each(function (user) {
           if (user != null) {
-            var user1 = new Gh3.User(user.login);
-            user1.fetch(function (error, resUser){
+            var currentUser = new Gh3.User(user.login);
+            currentUser.fetch(function (error, information){
               if(!error) {
-                global[i] = makeInformationObject(resUser);
-                if (position < 10) {
-                  showUserItem(global[i], i);
-                  $(".user").last().click(usersHandler);
+                searchAdditionalInformationItems[i] = makeInformationObject(information);
+                if (position < PAGINATION_VALUE) {
+                  showUserItem(searchAdditionalInformationItems[i], i);
+                  $(".user").last().click(showInformation);
                   position++;
                 }
-                else if (position == 10 && i == 10) {
+                else if (position == PAGINATION_VALUE && i == PAGINATION_VALUE) {
                   $("#nextLink").css("visibility", "visible");
                 }
                 i++;
@@ -143,31 +150,21 @@ $(function() {
     return showRepositoryInformation(information);
   }
 
-  function usersHandler() {
+  function showInformation() {
     var i = this.id;
-    additionalInformation = global[i];
+    additionalInformation = searchAdditionalInformationItems[i];
     if ($(this).children().length > 0) {
       $(this).children().remove();
     }
     else {
-      $(this).append($('<div class="additionalInformation">').append(showAdditionalInformation(global[i])));
+      $(this).append($('<div class="additionalInformation">')
+              .append(showAdditionalInformation(searchAdditionalInformationItems[i])));
     }
   }
 
-  function reposHandler(){
-    var i = this.id;
-    additionalInformation = global[i];
-    if ($(this).children().length > 0) {
-      $(this).children().remove();
-    }
-    else {
-      $(this).append($('<div class="additionalInformation">').append(showAdditionalInformation(global[i])));
-    }
-  }
-
-  function init() {
-    $(".user").click(usersHandler);
-    $(".repo").click(reposHandler);
+  function initClickEvents() {
+    $(".user").click(showInformation);
+    $(".repo").click(showInformation);
   }
 
   function makeInformationRepoObject(repository) {
@@ -202,16 +199,16 @@ $(function() {
   }
 
   function showTenUsers(offset){
-    var endPosition = (position+offset > global.length) ? global.length : position+offset;
+    var endPosition = (position+offset > searchAdditionalInformationItems.length) ? searchAdditionalInformationItems.length : position+offset;
     for (var i = position; i<endPosition; i++) {
-      showUserItem(global[i], i);
+      showUserItem(searchAdditionalInformationItems[i], i);
     }
   }
 
   function showTenRepositories(offset){
-    var endPosition = (position+offset > global.length) ? global.length : position+offset;
+    var endPosition = (position+offset > searchAdditionalInformationItems.length) ? searchAdditionalInformationItems.length : position+offset;
     for (var i = position; i<endPosition; i++) {
-      showRepoItem(global[i], i);
+      showRepoItem(searchAdditionalInformationItems[i], i);
     }
   }
 
