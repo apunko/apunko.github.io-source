@@ -1,7 +1,7 @@
 $(function() {
     var searchAdditionalInformationItems = [];
-    var position = 0;
-    var search_type = "users";
+    var nextItemPositionToShow = 0;
+    var searchType = "users";
     var READY_STATE = 4;
     var PAGINATION_VALUE = 10;
     var DOUBLE_PAGINATION_VALUE = 20;
@@ -13,22 +13,26 @@ $(function() {
 
     $("#nextLink").click(function () {
         displayNewPage();
-        if (position > PAGINATION_VALUE) $("#backLink").css("visibility", "visible");
-        if (position >= searchAdditionalInformationItems.length) $("#nextLink").css("visibility", "hidden");
+        if (nextItemPositionToShow > PAGINATION_VALUE) 
+            $("#backLink").css("visibility", "visible");
+        if (nextItemPositionToShow >= searchAdditionalInformationItems.length) 
+            $("#nextLink").css("visibility", "hidden");
     });
 
     $("#backLink").click(function () {
-        position = position - DOUBLE_PAGINATION_VALUE;
+        nextItemPositionToShow = nextItemPositionToShow - DOUBLE_PAGINATION_VALUE;
         displayNewPage();
-        if (position <= PAGINATION_VALUE) $("#backLink").css("visibility", "hidden");
-        if (position < searchAdditionalInformationItems.length) $("#nextLink").css("visibility", "visible");
+        if (nextItemPositionToShow <= PAGINATION_VALUE) 
+            $("#backLink").css("visibility", "hidden");
+        if (nextItemPositionToShow < searchAdditionalInformationItems.length) 
+            $("#nextLink").css("visibility", "visible");
     });
 
     function displayNewPage() {
         $("#SearchResult").html("");
         showTen(PAGINATION_VALUE);
         initClickEvents();
-        position = position + PAGINATION_VALUE;
+        nextItemPositionToShow = nextItemPositionToShow + PAGINATION_VALUE;
     }
 
     function searchInformation() {
@@ -67,9 +71,9 @@ $(function() {
     }
 
     function beforeSearchInit(type) {
-        search_type = type;
+        searchType = type;
         searchAdditionalInformationItems = [];
-        position = 0;
+        nextItemPositionToShow = 0;
     }
 
     function searchRepositories(keyword) {
@@ -80,11 +84,11 @@ $(function() {
                 Gh3.Repositories.each(function (repository) {
                   if (repository != null) {
                       searchAdditionalInformationItems[i] = makeInformationRepoObject(repository);
-                      if (position < PAGINATION_VALUE) {
+                      if (nextItemPositionToShow < PAGINATION_VALUE) {
                           showRepoItem(searchAdditionalInformationItems[i], i);
                           $(".repo").last().click(showInformation);
-                          position++;
-                      } else if (position == PAGINATION_VALUE && i == PAGINATION_VALUE) {
+                          nextItemPositionToShow++;
+                      } else if (nextItemPositionToShow == PAGINATION_VALUE && i == PAGINATION_VALUE) {
                           $("#nextLink").css("visibility", "visible");
                       }
                       i++;
@@ -106,11 +110,11 @@ $(function() {
                       currentUser.fetch(function (error, information){
                           if(!error) {
                               searchAdditionalInformationItems[i] = makeInformationObject(information);
-                              if (position < PAGINATION_VALUE) {
+                              if (nextItemPositionToShow < PAGINATION_VALUE) {
                                   showUserItem(searchAdditionalInformationItems[i], i);
                                   $(".user").last().click(showInformation);
-                                  position++;
-                              } else if (position == PAGINATION_VALUE && i == PAGINATION_VALUE) {
+                                  nextItemPositionToShow++;
+                              } else if (nextItemPositionToShow == PAGINATION_VALUE && i == PAGINATION_VALUE) {
                                   $("#nextLink").css("visibility", "visible");
                               }
                               i++;
@@ -186,7 +190,7 @@ $(function() {
     }
 
     function showTen(offset){
-        if (search_type == "users") {
+        if (searchType == "users") {
             showTenUsers(offset);
         } else {
             showTenRepositories(offset);
@@ -194,29 +198,31 @@ $(function() {
     }
 
     function showTenUsers(offset){
-        var endPosition = (position+offset > searchAdditionalInformationItems.length) ? searchAdditionalInformationItems.length : position+offset;
-        for (var i = position; i<endPosition; i++) {
+        var endPosition = (nextItemPositionToShow + offset > searchAdditionalInformationItems.length) ? 
+            searchAdditionalInformationItems.length : nextItemPositionToShow + offset;
+        for (var i = nextItemPositionToShow; i < endPosition; i++) {
             showUserItem(searchAdditionalInformationItems[i], i);
         }
     }
 
     function showTenRepositories(offset){
-        var endPosition = (position+offset > searchAdditionalInformationItems.length) ? searchAdditionalInformationItems.length : position+offset;
-        for (var i = position; i<endPosition; i++) {
+        var endPosition = (nextItemPositionToShow + offset > searchAdditionalInformationItems.length) ?
+            searchAdditionalInformationItems.length : nextItemPositionToShow + offset;
+        for (var i = nextItemPositionToShow; i < endPosition; i++) {
             showRepoItem(searchAdditionalInformationItems[i], i);
         }
     }
 
-    function showUserItem(item, position){
+    function showUserItem(item, nextItemPositionToShow){
         $("#SearchResult").append($("<li>").append(
-            $('<span class="user">').attr("id", position)
+            $('<span class="user">').attr("id", nextItemPositionToShow)
                 .text(item.login)
         ));
     }
 
-    function showRepoItem(item, position){
+    function showRepoItem(item, nextItemPositionToShow){
         $("#SearchResult").append($("<li>").append(
-          $('<span class="repo">').attr("id", position)
+          $('<span class="repo">').attr("id", nextItemPositionToShow)
               .text(item.name)
         ));
     }
