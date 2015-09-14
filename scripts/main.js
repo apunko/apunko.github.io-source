@@ -97,10 +97,10 @@ $(function() {
       if(!error) {    
         response.each(function (user) {
           if (user != null) {
-            var user1 = new Gh3.User(user.login);
-            user1.fetch(function (error, resUser){
+            var currentUser = new Gh3.User(user.login);
+            currentUser.fetch(function (error, information){
               if(!error) {
-                global[i] = makeInformationObject(resUser);
+                global[i] = makeInformationObject(information);
                 if (position < 10) {
                   showUserItem(global[i], i);
                   $(".user").last().click(usersHandler);
