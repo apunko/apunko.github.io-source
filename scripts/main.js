@@ -2,10 +2,52 @@ $(function() {
   var global = [];
   var position = 0;
   var search_type = "users";
+  $("#nextLink").css("visibility", "hidden");
+  $("#backLink").css("visibility", "hidden");
 
-  function addKeys() {
-    return "?client_id=8e0949ccd9a302148c2f&client_secret=490ba27f02472d922802ae0b340e5a9c40a9fbd0";
+
+  $("#nextLink").click(function () {
+    displayNewPage();
+    if (position > 10) $("#backLink").css("visibility", "visible");
+    if (position >= global.length) $("#nextLink").css("visibility", "hidden");
+  });
+
+  $("#backLink").click(function () {
+    position = position-20;
+    displayNewPage();
+    if (position <= 10) $("#backLink").css("visibility", "hidden");
+    if (position < global.length) $("#nextLink").css("visibility", "visible");
+  });
+
+  function displayNewPage() {
+    $("#SearchResult").html("");
+    showTen(10);
+    init();
+    position = position+10;
   }
+
+  $("#search").keyup(function (event) {
+    if (event.keyCode == 13) {
+      $("#search").blur();
+      searchInformation();
+    }
+  });
+
+  $("button").click(function () {
+    searchInformation();
+  });
+
+  function searchInformation() {
+    var keyword = $("#search").val();
+    $("#SearchResult").html("");
+    if ($("#UsersRadio").prop("checked")) {
+      searchUsers(keyword);   
+    }
+    else {
+      searchRepositories(keyword);
+    }
+  }
+
   function makeHttpCall(url, login, follow_type) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url + addKeys(), true);
@@ -45,31 +87,6 @@ $(function() {
     });
   }
 
-  function showRepoItem(item, position){
-    $("#SearchResult").append($("<li>").append(
-      $('<span class="repo">').attr("id", position)
-        .text(item.name)
-    ));
-  }
-
-  function showTenRepositories(offset){
-    var endPosition = (position+offset > global.length) ? global.length : position+offset;
-    for (var i = position; i<endPosition; i++) {
-      showRepoItem(global[i], i);
-    }
-  }
-
-  function makeInformationRepoObject(repository) {
-    object = {};
-    object["name"] = repository.name;
-    object["description"] = repository.description;
-    object["username"] = repository.username;
-    object["language"] = repository.language;
-    object["followers_amount"] = repository.followers;
-    object["forks_amount"] = repository.forks;
-    return object;
-  }
-
   function searchUsers(keyword) {
     search_type = "users";
     global = [];
@@ -100,30 +117,7 @@ $(function() {
       }
     });
   }
-  $("#search").keyup(function (e) {
-    if (e.keyCode == 13) {
-      var keyword = $("#search").val();
-      $("#SearchResult").html("");
-      $("#search").blur();
-      if ($("#UsersRadio").prop("checked")) {
-        searchUsers(keyword);   
-      }
-      else {
-        searchRepositories(keyword);
-      }
-    }
-  });
 
-  $("button").click(function () {
-    var keyword = $("#search").val();
-    $("#SearchResult").html("");
-    if ($("#UsersRadio").prop("checked")) {
-      searchUsers(keyword);   
-    }
-    else {
-      searchRepositories(keyword);
-    }
-  });
 
   function showHttpResponse(response, login, follow_type) {
     var ulContainer = $("ul." + login + "." + follow_type);
@@ -140,25 +134,6 @@ $(function() {
     var ulContainer = $("<ul>").addClass(login).addClass(follow_type);
     makeHttpCall(url, login, follow_type);
     return ulContainer;  
-  }
-
-  function showUserInformation(information) {
-    var informationContainer = $("<div>");
-    informationContainer.append($("<div>").text("login : " + information.login))
-                        .append($("<div>").text("name : " + information.name))
-                        .append($("<div>").text("followers : " + information.followers_amount))
-                        .append(makeFollowTypeList(information.followers_url, information.login, "followes"))
-                        .append($("<div>").text("following :" + information.following_amount))
-                        .append(makeFollowTypeList(information.following_url, information.login, "following"));
-    return informationContainer;
-  }
-
-  function showRepositoryInformation(information) {
-    var informationContainer = $("<div>");
-    for (var prop in information) {
-      informationContainer.append($("<div>").text(prop + " : " + information[prop]));
-    }
-    return informationContainer;
   }
 
   function showAdditionalInformation(information) {
@@ -195,48 +170,15 @@ $(function() {
     $(".repo").click(reposHandler);
   }
 
-  $("#nextLink").click(function () {
-    $("#SearchResult").html("");
-    showTen(10);
-    init();
-    position = position+10;
-    console.log(position);
-    if (position > 10) $("#backLink").css("visibility", "visible");
-    if (position >= global.length) $("#nextLink").css("visibility", "hidden");
-  });
-
-  $("#backLink").click(function () {
-    $("#SearchResult").html("");
-    position = position-20;
-    showTen(10);
-    init();
-    position = position+10;
-    console.log(position);
-    if (position <= 10) $("#backLink").css("visibility", "hidden");
-    if (position < global.length) $("#nextLink").css("visibility", "visible");
-  });
-
-  function showTen(offset){
-    if (search_type == "users") {
-      showTenUsers(offset);
-    }
-    else {
-      showTenRepositories(offset);
-    }
-  }
-
-  function showUserItem(item, position){
-    $("#SearchResult").append($("<li>").append(
-      $('<span class="user">').attr("id", position)
-        .text(item.login)
-    ));
-  }
-
-  function showTenUsers(offset){
-    var endPosition = (position+offset > global.length) ? global.length : position+offset;
-    for (var i = position; i<endPosition; i++) {
-      showUserItem(global[i], i);
-    }
+  function makeInformationRepoObject(repository) {
+    object = {};
+    object["name"] = repository.name;
+    object["description"] = repository.description;
+    object["username"] = repository.username;
+    object["language"] = repository.language;
+    object["followers_amount"] = repository.followers;
+    object["forks_amount"] = repository.forks;
+    return object;
   }
 
   function makeInformationObject(user) {
@@ -250,7 +192,64 @@ $(function() {
     return object;
   }
 
-  $("#nextLink").css("visibility", "hidden");
-  $("#backLink").css("visibility", "hidden");
+  function showTen(offset){
+    if (search_type == "users") {
+      showTenUsers(offset);
+    }
+    else {
+      showTenRepositories(offset);
+    }
+  }
+
+  function showTenUsers(offset){
+    var endPosition = (position+offset > global.length) ? global.length : position+offset;
+    for (var i = position; i<endPosition; i++) {
+      showUserItem(global[i], i);
+    }
+  }
+
+  function showTenRepositories(offset){
+    var endPosition = (position+offset > global.length) ? global.length : position+offset;
+    for (var i = position; i<endPosition; i++) {
+      showRepoItem(global[i], i);
+    }
+  }
+
+  function showUserItem(item, position){
+    $("#SearchResult").append($("<li>").append(
+      $('<span class="user">').attr("id", position)
+        .text(item.login)
+    ));
+  }
+
+  function showRepoItem(item, position){
+    $("#SearchResult").append($("<li>").append(
+      $('<span class="repo">').attr("id", position)
+        .text(item.name)
+    ));
+  }
+
+  function showUserInformation(information) {
+    var informationContainer = $("<div>");
+    informationContainer.append($("<div>").text("login : " + information.login))
+                        .append($("<div>").text("name : " + information.name))
+                        .append($("<div>").text("followers : " + information.followers_amount))
+                        .append(makeFollowTypeList(information.followers_url, information.login, "followes"))
+                        .append($("<div>").text("following :" + information.following_amount))
+                        .append(makeFollowTypeList(information.following_url, information.login, "following"));
+    return informationContainer;
+  }
+
+  function showRepositoryInformation(information) {
+    var informationContainer = $("<div>");
+    for (var prop in information) {
+      informationContainer.append($("<div>").text(prop + " : " + information[prop]));
+    }
+    return informationContainer;
+  }
+
+  function addKeys() {
+    return "?client_id=8e0949ccd9a302148c2f&client_secret=490ba27f02472d922802ae0b340e5a9c40a9fbd0";
+  }
 });
 
