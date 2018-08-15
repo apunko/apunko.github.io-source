@@ -1,20 +1,16 @@
 {
   "assetsByChunkName": {
     "component---src-pages-index-js": [
-      "component---src-pages-index-js-df93eb0c88a52638909b.js",
-      "component---src-pages-index-js-df93eb0c88a52638909b.js.map"
+      "component---src-pages-index-js-0516629dd845137430af.js",
+      "component---src-pages-index-js-0516629dd845137430af.js.map"
     ],
     "path---": [
-      "path----cac63ff5c1b42581353c.js",
-      "path----cac63ff5c1b42581353c.js.map"
+      "path----75ad7aa8d5b18d34e294.js",
+      "path----75ad7aa8d5b18d34e294.js.map"
     ],
     "component---src-layouts-index-js": [
-      "component---src-layouts-index-js-3a713137f99110dfd7b6.js",
-      "component---src-layouts-index-js-3a713137f99110dfd7b6.js.map"
-    ],
-    "path---page-2": [
-      "path---page-2-a0e39f21c11f6a62c5ab.js",
-      "path---page-2-a0e39f21c11f6a62c5ab.js.map"
+      "component---src-layouts-index-js-02a958023064caf49f0c.js",
+      "component---src-layouts-index-js-02a958023064caf49f0c.js.map"
     ],
     "path---index": [
       "path---index-a0e39f21c11f6a62c5ab.js",
@@ -32,19 +28,21 @@
       "path---404-html-a0e39f21c11f6a62c5ab.js",
       "path---404-html-a0e39f21c11f6a62c5ab.js.map"
     ],
-    "component---src-pages-page-2-js": [
-      "component---src-pages-page-2-js-1d4f0f19c1c44398ab65.js",
-      "component---src-pages-page-2-js-1d4f0f19c1c44398ab65.js.map"
-    ],
     "app": [
-      "app-8dd23e77dc57428a911d.js",
-      "build-js-styles.css",
-      "app-8dd23e77dc57428a911d.js.map",
-      "build-js-styles.css.map"
+      "app-04a62f9aa987c962b145.js",
+      "app-04a62f9aa987c962b145.js.map"
     ],
     "path---404": [
       "path---404-a0e39f21c11f6a62c5ab.js",
       "path---404-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-pages-about-js": [
+      "component---src-pages-about-js-9217fdc3d63164a7390b.js",
+      "component---src-pages-about-js-9217fdc3d63164a7390b.js.map"
+    ],
+    "path---about": [
+      "path---about-a0e39f21c11f6a62c5ab.js",
+      "path---about-a0e39f21c11f6a62c5ab.js.map"
     ]
   }
 }
