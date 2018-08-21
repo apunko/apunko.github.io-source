@@ -1,18 +1,12 @@
-import React from 'react'
-import MicrolinkCard from 'react-microlink'
+import React from 'react';
+import MicrolinkCard from 'react-microlink';
 
 const { links } = require('../data/links.json');
 
-class LinkContainer extends React.Component {
-  render() {
-    const microlinkCards = links.map(link => <MicrolinkCard key={link.id} url={link.url} />)
-    
-    return (
-      <>
-        {microlinkCards}
-      </>
-    )
-  }
-}
+const LinkContainer = () => (
+  <React.Fragment>
+    {links.map(link => <MicrolinkCard key={link.id} url={link.url} />)}
+  </React.Fragment>
+);
 
 export default LinkContainer;

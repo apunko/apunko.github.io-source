@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 
 import Routes from '../routes';
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <ul>
     <li>Blog</li>
     <li>
@@ -13,6 +13,6 @@ const Header = ({ siteTitle }) => (
       <Link to={Routes.about}>About</Link>
     </li>
   </ul>
-)
+);
 
 export default Header;

@@ -3,29 +3,37 @@
   "description": "Anton Punko - Web developer and chess lover.",
   "version": "0.0.1",
   "author": "Anton Punko <ant.punko@gmail.com>",
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ext .jsx --ext .js src",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "deploy": "gatsby build && gh-pages -b master -d public",
+    "format": "prettier --write 'src/**/*.js'"
+  },
   "dependencies": {
     "gatsby": "next",
     "gatsby-plugin-manifest": "next",
     "gatsby-plugin-react-helmet": "next",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
     "react-microlink": "^2.2.0",
     "styled-components": "^3.4.2"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "deploy": "gatsby build && gh-pages -b master -d public",
-    "format": "prettier --write 'src/**/*.js'"
-  },
   "devDependencies": {
-    "gh-pages": "^1.2.0",
-    "prettier": "^1.13.7"
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "gatsby-plugin-eslint": "^2.0.1",
+    "gh-pages": "^1.2.0"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import Layout from '../components/layout'
+import Layout from '../components/layout';
 
 const AboutPage = () => (
   <Layout>
@@ -8,6 +8,6 @@ const AboutPage = () => (
       <h1>About page</h1>
     </div>
   </Layout>
-)
+);
 
-export default AboutPage
+export default AboutPage;
