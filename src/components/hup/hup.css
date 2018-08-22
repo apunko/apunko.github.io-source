@@ -1,0 +1,8 @@
+.hup {
+  width: 100px;
+  height: 140px;
+  border: solid black 3px;
+  border-top: none;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+}

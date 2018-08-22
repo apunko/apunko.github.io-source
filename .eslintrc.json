@@ -7,6 +7,9 @@
     "plugin:import/warnings"
   ],
   "plugins": ["react", "jsx-a11y", "import"],
+  "rules": {
+    "react/destructuring-assignment": [0]
+  },
   "env": {
     "browser": true
   },

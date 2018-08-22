@@ -8,7 +8,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "lint": "eslint --ext .jsx --ext .js src",
+    "lint": "eslint src/*.{js,jsx}",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "deploy": "gatsby build && gh-pages -b master -d public",
