@@ -15,6 +15,7 @@
     "format": "prettier --write 'src/**/*.js'"
   },
   "dependencies": {
+    "firebase": "^5.4.1",
     "gatsby": "next",
     "gatsby-plugin-manifest": "next",
     "gatsby-plugin-react-helmet": "next",
