@@ -1,14 +1,14 @@
 import React from 'react';
-import Layout from '../components/layout';
+import AuthLayout from '../layouts/auth-layout';
 import Hup from '../components/hup';
 import HupForm from '../components/hup/hupForm';
 
 const HupsPage = () => (
-  <Layout>
+  <AuthLayout>
     <h2>Hups</h2>
     <Hup />
     <HupForm />
-  </Layout>
+  </AuthLayout>
 );
 
 export default HupsPage;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../components/layout';
+import Layout from '../layouts';
 import LinkContainer from '../components/link-container';
 
 const LinksPage = () => (

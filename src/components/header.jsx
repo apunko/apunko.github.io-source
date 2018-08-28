@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-
 import Routes from '../routes';
-import Auth from './auth';
 
 const Header = () => (
   <ul>
@@ -13,7 +11,6 @@ const Header = () => (
     <li>
       <Link to={Routes.about}>About</Link>
     </li>
-    <Auth />
   </ul>
 );
 

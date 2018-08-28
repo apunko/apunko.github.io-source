@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Firebase from '../services/firebase';
+
+const { Provider } = React.createContext();
 
 class Auth extends React.Component {
   constructor(props) {
@@ -9,14 +12,18 @@ class Auth extends React.Component {
       user: null,
     };
 
+    Firebase.auth().getRedirectResult()
+      .then((result) => {
+        this.setState({ user: result.user });
+      }).catch(error => console.error(error));
+
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   handleSignIn() {
-    Firebase.auth().signInWithPopup(new Firebase.auth.GoogleAuthProvider())
+    Firebase.auth().signInWithRedirect(new Firebase.auth.GoogleAuthProvider())
       .then((result) => {
-        console.log(result);
         this.setState({ user: result.user });
       })
       .catch(error => console.error(error));
@@ -28,14 +35,21 @@ class Auth extends React.Component {
   }
 
   render() {
+    console.log(this.state.user);
     return (
       <>
-        {this.state.user}
-        <button type="button" onClick={this.handleSignIn}>Sign in</button>
-        <button type="button" onClick={this.handleSignOut}>Sign out</button>
+        <Provider value={this.state.user}>
+          <button type="button" onClick={this.handleSignIn}>Sign in</button>
+          <button type="button" onClick={this.handleSignOut}>Sign out</button>
+          {this.props.children}
+        </Provider>
       </>
     );
   }
 }
+
+Auth.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Auth;
