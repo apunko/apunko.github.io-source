@@ -1,13 +1,17 @@
 import React from 'react';
 import { AuthLayout } from '../layouts';
-import Hup from '../components/hup';
-import HupForm from '../components/hup/hupForm';
+import HupCollection from '../components/hup-collection';
+import AuthContext from '../contexts/auth-context';
 
 const HupsPage = () => (
   <AuthLayout>
-    <h2>Hups</h2>
-    <Hup />
-    <HupForm />
+    <AuthContext.Consumer>
+      {
+        auth => (
+          auth.user && <HupCollection />
+        )
+      }
+    </AuthContext.Consumer>
   </AuthLayout>
 );
 

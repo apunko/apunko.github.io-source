@@ -7,13 +7,20 @@ const AuthLinks = ({ auth }) => {
     return <button type="button" onClick={auth.handleSignIn}>Sign in</button>;
   }
 
-  return (<>
-    <button type="button" onClick={auth.handleSignOut}>Sign out</button>
-  </>);
+  return (
+    <>
+      {auth.user.displayName}
+      <button type="button" onClick={auth.handleSignOut}>Sign out</button>
+    </>
+  );
 };
 
 AuthLinks.propTypes = {
-  auth: PropTypes.isRequired,
+  auth: PropTypes.shape({
+    user: {},
+    handleSignIn: PropTypes.func.isRequired,
+    handleSignOut: PropTypes.func.isRequired,
+  }),
 };
 
 export default AuthLinks;

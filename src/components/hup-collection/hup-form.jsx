@@ -1,13 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+const defaultState = {
+  size: 100,
+  title: '',
+};
 
 class HupForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      size: 100,
-      title: '',
-    };
+    this.state = defaultState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,8 +22,9 @@ class HupForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // hup saving logic
-    console.log(this.state);
+
+    this.props.addHup(this.state);
+    this.setState(defaultState);
   }
 
   render() {
@@ -39,5 +43,9 @@ class HupForm extends React.Component {
     );
   }
 }
+
+HupForm.propTypes = {
+  addHup: PropTypes.func.isRequired,
+};
 
 export default HupForm;

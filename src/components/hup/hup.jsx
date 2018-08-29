@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './hup.css';
 
 class Hup extends React.Component {
@@ -6,8 +7,8 @@ class Hup extends React.Component {
     super(props);
 
     this.state = {
-      size: 100,
-      drops: 4,
+      size: this.props.size,
+      drops: this.props.drops,
     };
 
     this.add = this.add.bind(this);
@@ -44,5 +45,10 @@ class Hup extends React.Component {
     );
   }
 }
+
+Hup.propTypes = {
+  size: PropTypes.number.isRequired,
+  drops: PropTypes.number.isRequired,
+};
 
 export default Hup;
