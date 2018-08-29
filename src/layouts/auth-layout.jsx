@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Auth from '../components/auth';
 import AuthContext from '../contexts/auth-context';
+import AuthLinks from '../components/auth-links';
 import Layout from './layout';
 
 const AuthLayout = ({ children }) => (
@@ -9,14 +10,7 @@ const AuthLayout = ({ children }) => (
     <AuthContext.Consumer>
       {
         auth => (
-          <Layout
-            auth={
-              <>
-                <button type="button" onClick={auth.handleSignIn}>Sign in</button>
-                <button type="button" onClick={auth.handleSignOut}>Sign out</button>
-              </>
-            }
-          >
+          <Layout auth={<AuthLinks auth={auth} />}>
             {children}
           </Layout>
         )
