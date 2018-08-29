@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Firebase from '../services/firebase';
-
-const { Provider } = React.createContext();
+import AuthContext from '../contexts/auth-context';
 
 class Auth extends React.Component {
   constructor(props) {
@@ -35,14 +34,19 @@ class Auth extends React.Component {
   }
 
   render() {
-    console.log(this.state.user);
     return (
       <>
-        <Provider value={this.state.user}>
-          <button type="button" onClick={this.handleSignIn}>Sign in</button>
-          <button type="button" onClick={this.handleSignOut}>Sign out</button>
+        <AuthContext.Provider
+          value={
+            {
+              user: this.state.user,
+              handleSignIn: this.handleSignIn,
+              handleSignOut: this.handleSignOut,
+            }
+          }
+        >
           {this.props.children}
-        </Provider>
+        </AuthContext.Provider>
       </>
     );
   }

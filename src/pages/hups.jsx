@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthLayout from '../layouts/auth-layout';
+import { AuthLayout } from '../layouts';
 import Hup from '../components/hup';
 import HupForm from '../components/hup/hupForm';
 
