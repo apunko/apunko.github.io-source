@@ -8,7 +8,7 @@ const HupsPage = () => (
     <AuthContext.Consumer>
       {
         auth => (
-          auth.user && <HupCollection />
+          auth.user && <HupCollection userEmail={auth.user.email} />
         )
       }
     </AuthContext.Consumer>
