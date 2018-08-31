@@ -26,6 +26,8 @@ class HupCollection extends React.Component {
       });
 
     this.addHup = this.addHup.bind(this);
+    this.onDrop = this.updateHup.bind(this, 1, hup => hup.size <= hup.drops);
+    this.onPickUp = this.updateHup.bind(this, -1, hup => hup.drops <= 0);
   }
 
   addHup(hup) {
@@ -34,9 +36,25 @@ class HupCollection extends React.Component {
     ));
   }
 
+  updateHup(event, value, shouldCancelUpdate) {
+    const { id } = event.target;
+    const hupForUpdate = this.state.hups.find(hup => hup.id === id);
+    if (shouldCancelUpdate(hupForUpdate)) {
+      return;
+    }
+
+    this.setState(prevState => (
+      {
+        hups: prevState.hups.map(hup => (
+          hup.id === id ? { ...hup, drops: hup.drops + value } : hup
+        )),
+      }
+    ));
+  }
+
   render() {
     const hups = this.state.hups.map(hup => (
-      <Hup key={hup.id} size={hup.size} drops={hup.drops} />
+      <Hup key={hup.id} {...hup} onDrop={this.onDrop} onPickUp={this.onPickUp} />
     ));
 
     return (

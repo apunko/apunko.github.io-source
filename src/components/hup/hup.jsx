@@ -3,44 +3,18 @@ import PropTypes from 'prop-types';
 import './hup.css';
 
 class Hup extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      size: this.props.size,
-      drops: this.props.drops,
-    };
-
-    this.add = this.add.bind(this);
-    this.decrease = this.decrease.bind(this);
-  }
-
-  add() {
-    if (this.state.size <= this.state.drops) {
-      return;
-    }
-
-    this.setState(prevState => ({ drops: prevState.drops + 1 }));
-  }
-
-  decrease() {
-    if (this.state.drops <= 0) {
-      return;
-    }
-
-    this.setState(prevState => ({ drops: prevState.drops - 1 }));
-  }
-
   render() {
-    const { size, drops } = this.state;
+    const {
+      size, drops, id, title,
+    } = this.props;
 
     return (
       <>
         <div className="hup">
-          {`${drops}/${size}`}
+          {`${title} - ${drops}/${size}`}
         </div>
-        <button type="button" onClick={this.add} disabled={drops >= size}>Add</button>
-        <button type="button" onClick={this.decrease} disabled={drops <= 0}>Decrease</button>
+        <button type="button" id={id} onClick={this.props.onDrop} disabled={drops >= size}>Add</button>
+        <button type="button" id={id} onClick={this.props.onPickUp} disabled={drops <= 0}>Decrease</button>
       </>
     );
   }
@@ -49,6 +23,10 @@ class Hup extends React.Component {
 Hup.propTypes = {
   size: PropTypes.number.isRequired,
   drops: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onDrop: PropTypes.func.isRequired,
+  onPickUp: PropTypes.func.isRequired,
 };
 
 export default Hup;

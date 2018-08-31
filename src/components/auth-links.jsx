@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AuthLinks = ({ auth }) => {
-  console.log(auth);
   if (!auth || !auth.user) {
     return <button type="button" onClick={auth.handleSignIn}>Sign in</button>;
   }

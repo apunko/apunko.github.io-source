@@ -6,12 +6,9 @@ import Routes from '../routes';
 const Header = ({ children }) => (
   <ul>
     <li>Blog</li>
-    <li>
-      <Link to={Routes.links}>Life changing links</Link>
-    </li>
-    <li>
-      <Link to={Routes.about}>About</Link>
-    </li>
+    <li><Link to={Routes.links}>Life changing links</Link></li>
+    <li><Link to={Routes.about}>About</Link></li>
+    <li><Link to={Routes.hups}>Hups</Link></li>
     {children}
   </ul>
 );
