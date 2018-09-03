@@ -2,28 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Hup from '../hup';
 import HupForm from './hup-form';
-import Firebase from '../../services/firebase';
+import HupsService from '../../services/hups-service';
 
 class HupCollection extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = { hups: [] };
+    this.hupsService = new HupsService(this.props.userEmail);
 
-    Firebase.hupsRef(this.props.userEmail).get()
-      .then((querySnapshot) => {
-        const hups = [];
-        querySnapshot.forEach((doc) => {
-          hups.push({
-            ...doc.data(),
-            id: doc.id,
-          });
-        });
-        this.setState({ hups });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.hupsService.getAll().then(hups => this.setState({ hups }));
 
     this.addHup = this.addHup.bind(this);
     this.onDrop = this.updateHup.bind(this, 1, hup => hup.size <= hup.drops);
@@ -33,29 +21,21 @@ class HupCollection extends React.Component {
   }
 
   addHup(hup) {
-    Firebase.hupsRef(this.props.userEmail)
-      .add({ ...hup, drops: 0 })
-      .then((docRef) => {
+    this.hupsService.create({ ...hup, drops: 0 })
+      .then((createdHup) => {
         this.setState(prevState => (
-          { hups: [...prevState.hups, { ...hup, id: docRef.id, drops: 0 }] }
+          { hups: [...prevState.hups, createdHup] }
         ));
-      })
-      .catch((error) => {
-        console.log(error);
       });
   }
 
   deleteHup(event) {
     const { id } = event.target;
-    Firebase.hupsRef(this.props.userEmail).doc(id).delete()
-      .then(() => {
-        this.setState(prevState => (
-          { hups: prevState.hups.filter(hup => hup.id !== id) }
-        ));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.hupsService.destroy(id).then(() => {
+      this.setState(prevState => (
+        { hups: prevState.hups.filter(hup => hup.id !== id) }
+      ));
+    });
   }
 
   updateHup(value, shouldCancelUpdate, event) {
@@ -77,11 +57,7 @@ class HupCollection extends React.Component {
   saveHup(event) {
     const { id } = event.target;
     const hupForSave = this.state.hups.find(hup => hup.id === id);
-    Firebase.hupsRef(this.props.userEmail).doc(id)
-      .update({ drops: hupForSave.drops })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.hupsService.update(id, { drops: hupForSave.drops });
   }
 
   render() {
@@ -99,8 +75,8 @@ class HupCollection extends React.Component {
     return (
       <>
         <h2>Hups</h2>
-        {hups}
         <HupForm addHup={this.addHup} />
+        {hups}
       </>
     );
   }

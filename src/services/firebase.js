@@ -19,10 +19,6 @@ class Firebase {
     this.auth = firebase.auth;
     this.db = firebase.firestore;
   }
-
-  hupsRef(userEmail) {
-    return this.db().collection('users').doc(userEmail).collection('hups');
-  }
 }
 
 export default new Firebase();
