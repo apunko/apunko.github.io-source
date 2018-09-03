@@ -2,5 +2,16 @@ module.exports = {
   siteMetadata: {
     title: 'Web developer and chess lover',
   },
-  plugins: ['gatsby-plugin-react-helmet', 'gatsby-plugin-eslint'],
+  plugins: [
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/src/data/`,
+        name: 'data',
+      },
+    },
+    'gatsby-transformer-json',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-eslint',
+  ],
 };
