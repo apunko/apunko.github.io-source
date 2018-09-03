@@ -31,12 +31,19 @@ class HupCollection extends React.Component {
   }
 
   addHup(hup) {
-    this.setState(prevState => (
-      { hups: [...prevState.hups, { ...hup, drops: 0 }] }
-    ));
+    Firebase.hupsRef(this.props.userEmail)
+      .add({ ...hup, drops: 0 })
+      .then((docRef) => {
+        this.setState(prevState => (
+          { hups: [...prevState.hups, { ...hup, id: docRef.id, drops: 0 }] }
+        ));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  updateHup(event, value, shouldCancelUpdate) {
+  updateHup(value, shouldCancelUpdate, event) {
     const { id } = event.target;
     const hupForUpdate = this.state.hups.find(hup => hup.id === id);
     if (shouldCancelUpdate(hupForUpdate)) {
@@ -54,7 +61,12 @@ class HupCollection extends React.Component {
 
   render() {
     const hups = this.state.hups.map(hup => (
-      <Hup key={hup.id} {...hup} onDrop={this.onDrop} onPickUp={this.onPickUp} />
+      <Hup
+        {...hup}
+        key={hup.id}
+        onDrop={this.onDrop}
+        onPickUp={this.onPickUp}
+      />
     ));
 
     return (
