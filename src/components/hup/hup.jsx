@@ -16,6 +16,7 @@ class Hup extends React.Component {
         <button type="button" id={id} onClick={this.props.onDrop} disabled={drops >= size}>Add</button>
         <button type="button" id={id} onClick={this.props.onPickUp} disabled={drops <= 0}>Decrease</button>
         <button type="button" id={id} onClick={this.props.onSave}>Save</button>
+        <button type="button" id={id} onClick={this.props.onDelete}>Delete</button>
       </>
     );
   }
@@ -29,6 +30,7 @@ Hup.propTypes = {
   onDrop: PropTypes.func.isRequired,
   onPickUp: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Hup;
