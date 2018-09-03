@@ -29,6 +29,7 @@ class HupCollection extends React.Component {
     this.onDrop = this.updateHup.bind(this, 1, hup => hup.size <= hup.drops);
     this.onPickUp = this.updateHup.bind(this, -1, hup => hup.drops <= 0);
     this.deleteHup = this.deleteHup.bind(this);
+    this.saveHup = this.saveHup.bind(this);
   }
 
   addHup(hup) {
@@ -73,6 +74,16 @@ class HupCollection extends React.Component {
     ));
   }
 
+  saveHup(event) {
+    const { id } = event.target;
+    const hupForSave = this.state.hups.find(hup => hup.id === id);
+    Firebase.hupsRef(this.props.userEmail).doc(id)
+      .update({ drops: hupForSave.drops })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     const hups = this.state.hups.map(hup => (
       <Hup
@@ -81,6 +92,7 @@ class HupCollection extends React.Component {
         onDrop={this.onDrop}
         onPickUp={this.onPickUp}
         onDelete={this.deleteHup}
+        onSave={this.saveHup}
       />
     ));
 
