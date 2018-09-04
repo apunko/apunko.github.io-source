@@ -3,4 +3,5 @@ export default {
   links: '/links',
   root: '/',
   hups: '/hups',
+  bookReviews: '/book-reviews',
 };
