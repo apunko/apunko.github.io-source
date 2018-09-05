@@ -11,13 +11,15 @@ class Auth extends React.Component {
       user: null,
     };
 
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
+  }
+
+  componentDidMount() {
     Firebase.auth().getRedirectResult()
       .then((result) => {
         this.setState({ user: result.user });
       }).catch(error => console.error(error));
-
-    this.handleSignIn = this.handleSignIn.bind(this);
-    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   handleSignIn() {
