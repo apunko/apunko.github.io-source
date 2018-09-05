@@ -20,6 +20,7 @@
     }
   },
   "dependencies": {
+    "draft-js": "^0.10.5",
     "firebase": "^5.4.1",
     "gatsby": "next",
     "gatsby-plugin-manifest": "next",
@@ -32,7 +33,9 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
+    "react-mde": "^5.8.0",
     "react-microlink": "^2.2.0",
+    "showdown": "^1.8.6",
     "styled-components": "^3.4.2"
   },
   "devDependencies": {
