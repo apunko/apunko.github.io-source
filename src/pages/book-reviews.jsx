@@ -2,7 +2,7 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import Markdown from 'markdown-to-jsx';
 import { Layout } from '../layouts';
-import MarkDownEditor from '../components/markdown-editor';
+import ReviewForm from '../components/review-form';
 
 const LinkContainer = () => (
   <Layout>
@@ -32,7 +32,7 @@ const LinkContainer = () => (
               <Markdown>{edge.node.html}</Markdown>
             </>
           ))}
-          <MarkDownEditor />
+          <ReviewForm />
         </>
       )}
     />
