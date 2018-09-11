@@ -9,7 +9,8 @@
   "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
     "react/destructuring-assignment": [0],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-console": "off"
   },
   "env": {
     "browser": true
