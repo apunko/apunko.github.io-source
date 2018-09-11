@@ -19,7 +19,7 @@ const HTML = ({
       <div
         key="body"
         id="___gatsby"
-        dangerouslySetInnerHTML={{ __html: body }}
+        dangerouslySetInnerHTML={{ __html: body }} // eslint-disable-line react/no-danger
       />
       {postBodyComponents}
     </body>

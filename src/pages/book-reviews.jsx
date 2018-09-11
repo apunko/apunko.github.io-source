@@ -1,8 +1,8 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import Markdown from 'markdown-to-jsx';
 import { Layout } from '../layouts';
 import ReviewForm from '../components/review-form';
+import Review from '../components/review';
 
 const BookReviewsPage = () => (
   <Layout>
@@ -27,11 +27,10 @@ const BookReviewsPage = () => (
         <>
           <h1>Book reviews</h1>
           {data.allMarkdownRemark.edges.map(edge => (
-            <div key={edge.node.frontmatter.title}>
+            <>
               <hr />
-              <h2>{edge.node.frontmatter.title}</h2>
-              <Markdown>{edge.node.html}</Markdown>
-            </div>
+              <Review title={edge.node.frontmatter.title} html={edge.node.html} />
+            </>
           ))}
           <hr />
           <ReviewForm handleSave={review => console.log(review)} />
