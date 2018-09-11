@@ -4,7 +4,7 @@ import Markdown from 'markdown-to-jsx';
 import { Layout } from '../layouts';
 import ReviewForm from '../components/review-form';
 
-const LinkContainer = () => (
+const BookReviewsPage = () => (
   <Layout>
     <StaticQuery
       query={graphql`
@@ -27,16 +27,18 @@ const LinkContainer = () => (
         <>
           <h1>Book reviews</h1>
           {data.allMarkdownRemark.edges.map(edge => (
-            <>
-              <h2 key={edge.node.frontmatter.title}>{edge.node.frontmatter.title}</h2>
+            <div key={edge.node.frontmatter.title}>
+              <hr />
+              <h2>{edge.node.frontmatter.title}</h2>
               <Markdown>{edge.node.html}</Markdown>
-            </>
+            </div>
           ))}
-          <ReviewForm />
+          <hr />
+          <ReviewForm handleSave={review => console.log(review)} />
         </>
       )}
     />
   </Layout>
 );
 
-export default LinkContainer;
+export default BookReviewsPage;

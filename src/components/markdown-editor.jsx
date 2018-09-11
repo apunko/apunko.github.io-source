@@ -15,6 +15,7 @@ class MarkdownEditor extends React.Component {
     return (
       <div className="container">
         <ReactMde
+          layout="horizontal"
           onChange={this.props.handleChange}
           editorState={this.props.value}
           generateMarkdownPreview={markdown => Promise.resolve(this.converter.makeHtml(markdown))}
