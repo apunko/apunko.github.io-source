@@ -1,0 +1,23 @@
+ul.header {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+
+  div.right {
+    float: right;
+  }
+
+  li {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}

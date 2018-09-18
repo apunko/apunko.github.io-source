@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MarkdownEditor from '../markdown-editor';
-import './review-form.css';
+import './review-form.scss';
 
 class ReviewForm extends React.Component {
   constructor(props) {

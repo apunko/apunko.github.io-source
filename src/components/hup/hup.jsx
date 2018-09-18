@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './hup.css';
+import './hup.scss';
 
 class Hup extends React.Component {
   render() {

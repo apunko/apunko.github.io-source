@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'markdown-to-jsx';
-import './review.css';
+import './review.scss';
 
 class Review extends React.Component {
   constructor(props) {

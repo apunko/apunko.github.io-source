@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import Routes from '../../routes';
-import './header.css';
+import './header.scss';
 
 const Header = ({ children }) => (
   <ul className="header">

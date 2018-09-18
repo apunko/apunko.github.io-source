@@ -25,6 +25,7 @@
     "gatsby": "next",
     "gatsby-plugin-manifest": "next",
     "gatsby-plugin-react-helmet": "next",
+    "gatsby-plugin-sass": "^2.0.1",
     "gatsby-source-filesystem": "^1.5.39",
     "gatsby-transformer-json": "^1.0.20",
     "gatsby-transformer-remark": "^1.7.44",
@@ -36,7 +37,7 @@
     "react-mde": "^5.8.0",
     "react-microlink": "^2.2.0",
     "showdown": "^1.8.6",
-    "styled-components": "^3.4.2"
+    "styled-components": "^3.4.8"
   },
   "devDependencies": {
     "eslint": "^5.4.0",
@@ -47,7 +48,8 @@
     "eslint-plugin-react": "^7.11.1",
     "gatsby-plugin-eslint": "^2.0.1",
     "gh-pages": "^1.2.0",
-    "husky": "^1.0.0-rc.13"
+    "husky": "^1.0.0-rc.13",
+    "node-sass": "^4.9.3"
   },
   "repository": {
     "type": "git",
