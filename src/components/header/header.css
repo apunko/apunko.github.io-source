@@ -1,4 +1,4 @@
-ul {
+ul.header {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -6,21 +6,21 @@ ul {
   background-color: #333;
 }
 
-ul div.right {
+ul.header div.right {
   float: right;
 }
 
-li {
+ul.header li {
   float: left;
 }
 
-li {
+ul.header li {
   color: white;
   text-align: center;
   padding: 14px 16px;
 }
 
-li a {
+ul.header li a {
   color: white;
   text-decoration: none;
 }

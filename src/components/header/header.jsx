@@ -5,7 +5,7 @@ import Routes from '../../routes';
 import './header.css';
 
 const Header = ({ children }) => (
-  <ul>
+  <ul className="header">
     <li><Link to={Routes.blog}>Blog</Link></li>
     <li><Link to={Routes.links}>Life changing links</Link></li>
     <li><Link to={Routes.bookReviews}>Book reviews</Link></li>
