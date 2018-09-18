@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const defaultState = {
   size: 100,
   title: '',
+  dropValue: '',
 };
 
 class HupForm extends React.Component {
@@ -23,7 +24,7 @@ class HupForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.props.addHup(this.state);
+    this.props.addHup({ ...this.state, size: Number(this.state.size) });
     this.setState(defaultState);
   }
 
@@ -33,6 +34,10 @@ class HupForm extends React.Component {
         <label htmlFor="title">
           Title:
           <input name="title" type="text" value={this.state.title} onChange={this.handleChange} />
+        </label>
+        <label htmlFor="dropValue">
+          One drop value:
+          <input name="dropValue" type="text" value={this.state.dropValue} onChange={this.handleChange} />
         </label>
         <label htmlFor="size">
           Size:
