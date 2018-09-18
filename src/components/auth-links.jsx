@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 const AuthLinks = ({ auth }) => {
   if (!auth || !auth.user) {
-    return <button type="button" onClick={auth.handleSignIn}>Sign in</button>;
+    return <li><button type="button" onClick={auth.handleSignIn}>Sign in</button></li>;
   }
 
   return (
     <>
-      {auth.user.displayName}
-      <button type="button" onClick={auth.handleSignOut}>Sign out</button>
+      <li>{auth.user.displayName}</li>
+      <li><button type="button" onClick={auth.handleSignOut}>Sign out</button></li>
     </>
   );
 };

@@ -1,0 +1,26 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul div.right {
+  float: right;
+}
+
+li {
+  float: left;
+}
+
+li {
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+}
+
+li a {
+  color: white;
+  text-decoration: none;
+}
