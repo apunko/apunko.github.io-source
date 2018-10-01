@@ -20,16 +20,16 @@ Changing, or creating a new habit is a hard work. It won't be easy, no 25 days, 
 
 Now I have several ideas about my personal habits and things I want to change. But I'm aware of the hard parts. So for now working on change one habit per time is better than nothing.
 
-My example:
+### My example:
 
 I work in an office without coolers. So in order to get a cap of water, I need to make a long way to the kitchen. It's a pretty long way because my seat is on the opposite side of the flat. At first, it was an irritation to make the whole way. But during my reading, I noticed that it is a possibility to make exercises several times per day. 
 
 So my habit loop was:
 - **Cue** - I want to drink
-- **Routine** - Way to a Kitchen
+- **Routine** - Way to the kitchen
 - **Reward** - A sip of water
 
-It's was a habit after two weeks. The routine part is a changeable one. So I changed it.
+The routine part is a changeable one. So I changed it.
 
 - **New routine** - Way to the kitchen -> turn to exercise corner -> some pull-ups or push-ups -> Way to the kitchen
 
