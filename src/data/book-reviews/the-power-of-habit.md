@@ -1,8 +1,8 @@
 ---
-title: "The Power of Habit"
+title: "The Power of Habit 2"
 author: "Charles Duhigg"
 date: "2018-10-01"
-url: "https://www.amazon.com/Power-Habit-What-Life-Business/dp/081298160X"
+link: "https://www.amazon.com/Power-Habit-What-Life-Business/dp/081298160X"
 ---
 
 ## Quick feedback
@@ -16,7 +16,7 @@ Strongly recommend for everyone
 
 The book shows how habits works, **the Habit loop**, and on real examples explains the Power of Habit. The real examples made me believe in it, they are the brilliancy of the book. Is it giving you a secret key to be a smart and successful person? Definitely not. It gives only a possibility to understand yourself, the habit part of yourself.
 
-Changing, or creating a new habit is a hard work. It won't be easy, no 25 days, no magic. Only your awareness of yourself, analyses of your habit loops, experiments with rootings and search of the cues and rewards(craving rewards) can make it. And of course the first and the most important step. Understanding how habits work.
+Changing, or creating a new habit is a hard work. It won't be easy, no 25 days, no magic. Only your awareness of yourself, analyses of your habit loops, experiments with routines and search of the cues and rewards(craving rewards) can make it. And of course the first and the most important step. Understanding how habits work.
 
 Now I have several ideas about my personal habits and things I want to change. But I'm aware of the hard parts. So for now working on change one habit per time is better than nothing.
 
@@ -26,13 +26,13 @@ I work in an office without coolers. So in order to get a cap of water, I need t
 
 So my habit loop was:
 - **Cue** - I want to drink
-- **Rooting** - Way to a Kitchen
+- **Routine** - Way to a Kitchen
 - **Reward** - A sip of water
 
-It's was a habit after two weeks. The rooting part is a changeable one. So I changed it.
+It's was a habit after two weeks. The routine part is a changeable one. So I changed it.
 
-- **New rooting** - Way to the kitchen -> turn to exercise corner -> some pull-ups or push-ups -> Way to the kitchen
+- **New routine** - Way to the kitchen -> turn to exercise corner -> some pull-ups or push-ups -> Way to the kitchen
 
-The cue and reward are the same. Rooting is different.
+The cue and reward are the same. Routine is different.
 
 My habit is an easy one to change. But even the small ones can change our lives dramatically. I wish you good luck with future habit adventures!

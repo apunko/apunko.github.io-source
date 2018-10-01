@@ -18,14 +18,22 @@ class Review extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="review">
         <div>
-          <span className="review-title">{this.props.title}</span>
+          <span className="review-title">
+            {this.props.title} <i>by {this.props.author}</i>
+          </span>
           <button type="button" onClick={this.toggleReview}>
             Toggle review
           </button>
         </div>
-        {this.state.open && <Markdown>{this.props.html}</Markdown>}
+        {this.state.open
+          && (
+          <div>
+            <a href={this.props.link} rel="noopener noreferrer" target="_blank">Link to the book</a>
+            <Markdown>{this.props.html}</Markdown>
+          </div>)
+        }
       </div>
     );
   }
@@ -33,6 +41,8 @@ class Review extends React.Component {
 
 Review.propTypes = {
   title: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   html: PropTypes.string.isRequired,
 };
 

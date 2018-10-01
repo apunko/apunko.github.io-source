@@ -10,7 +10,9 @@
   "rules": {
     "react/destructuring-assignment": [0],
     "import/prefer-default-export": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "no-debugger": "warn",
+    "react/jsx-one-expression-per-line": "off"
   },
   "env": {
     "browser": true

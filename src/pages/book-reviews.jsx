@@ -16,6 +16,8 @@ const BookReviewsPage = () => (
               node {
                 frontmatter {
                   title
+                  author
+                  link
                 }
                 html
               }
@@ -26,12 +28,16 @@ const BookReviewsPage = () => (
       render={data => (
         <>
           <h1>Book reviews</h1>
-          {data.allMarkdownRemark.edges.map(edge => (
-            <>
-              <hr />
-              <Review title={edge.node.frontmatter.title} html={edge.node.html} />
-            </>
-          ))}
+          {data.allMarkdownRemark.edges.map((edge) => {
+            const { html, frontmatter: { title, author, link } } = edge.node;
+
+            return (
+              <>
+                <hr />
+                <Review title={title} author={author} link={link} html={html} />
+              </>
+            );
+          })}
           <hr />
           <ReviewForm handleSave={review => console.log(review)} />
         </>
