@@ -27,13 +27,13 @@ class ReviewForm extends React.Component {
 
   render() {
     return (
-      <>
+      <div>
         <h2>Add new review:</h2>
         <div>
           <MarkdownEditor value={this.state.mdeState} handleChange={this.handleMarkdownChange} />
           <button className="save-review" type="button" onClick={this.handleSave}>Save</button>
         </div>
-      </>
+      </div>
     );
   }
 }

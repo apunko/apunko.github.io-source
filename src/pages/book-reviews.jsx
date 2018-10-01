@@ -18,6 +18,7 @@ const BookReviewsPage = () => (
                   title
                   author
                   link
+                  date
                 }
                 html
               }
@@ -29,17 +30,23 @@ const BookReviewsPage = () => (
         <>
           <h1>Book reviews</h1>
           {data.allMarkdownRemark.edges.map((edge) => {
-            const { html, frontmatter: { title, author, link } } = edge.node;
+            const {
+              html, frontmatter: {
+                title, author, link, date,
+              },
+            } = edge.node;
 
             return (
               <>
                 <hr />
-                <Review title={title} author={author} link={link} html={html} />
+                <Review title={title} author={author} link={link} date={date} html={html} />
               </>
             );
           })}
-          <hr />
-          <ReviewForm handleSave={review => console.log(review)} />
+          <div>
+            <hr />
+            <ReviewForm handleSave={review => console.log(review)} />
+          </div>
         </>
       )}
     />

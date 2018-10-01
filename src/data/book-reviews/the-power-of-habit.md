@@ -12,7 +12,7 @@ Enjoyed the book. The real-life examples and a good narrative make the reading o
 Strongly recommend for everyone
 
 ## Thoughts
-*25 days and everything can become a habit!* It was my belief for 5+ years. I have started several times making exercises in the morning, waiting for 25 days, and it seems it works, but it doesn't. The one day I skipped an exercise routine -> and it is gone. My habit is gone. I drained my willpower for a month, and in a day of weakness, all my efforts become nothing. I needed to start again, but I didn't want to. So something was wrong...
+*25 days and everything will become a habit!* It was my belief for 5+ years. I have started several times making exercises in the morning, waiting for 25 days, and it seems it works, but it doesn't. The one day I skipped an exercise routine -> and it is gone. My habit is gone. I drained my willpower for a month, and in a day of weakness, all my efforts become nothing. I needed to start again, but I didn't want to. So something was wrong...
 
 The book shows how habits works, **the Habit loop**, and on real examples explains the Power of Habit. The real examples made me believe in it, they are the brilliancy of the book. Is it giving you a secret key to be a smart and successful person? Definitely not. It gives only a possibility to understand yourself, the habit part of yourself.
 
@@ -31,7 +31,7 @@ So my habit loop was:
 
 The routine part is a changeable one. So I changed it.
 
-- **New routine** - Way to the kitchen -> turn to exercise corner -> some pull-ups or push-ups -> Way to the kitchen
+- **New routine** - Way to the kitchen -> turn to exercise corner -> some pull-ups or push-ups -> way to the kitchen
 
 The cue and reward are the same. Routine is different.
 

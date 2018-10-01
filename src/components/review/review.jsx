@@ -17,11 +17,15 @@ class Review extends React.Component {
   }
 
   render() {
+    const {
+      title, author, link, date, html,
+    } = this.props;
+
     return (
       <div className="review">
         <div>
           <span className="review-title">
-            {this.props.title} <i>by {this.props.author}</i>
+            {title} <i>by {author}</i>
           </span>
           <button type="button" onClick={this.toggleReview}>
             Toggle review
@@ -30,8 +34,11 @@ class Review extends React.Component {
         {this.state.open
           && (
           <div>
-            <a href={this.props.link} rel="noopener noreferrer" target="_blank">Link to the book</a>
-            <Markdown>{this.props.html}</Markdown>
+            <a href={link} rel="noopener noreferrer" target="_blank">Link to the book</a>
+            <Markdown>{html}</Markdown>
+            <div className="created-date">
+              {date}
+            </div>
           </div>)
         }
       </div>
@@ -42,6 +49,7 @@ class Review extends React.Component {
 Review.propTypes = {
   title: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   html: PropTypes.string.isRequired,
 };
