@@ -1,5 +1,5 @@
 ---
-title: "The Power of Habit 2"
+title: "The Power of Habit"
 author: "Charles Duhigg"
 date: "2018-10-01"
 link: "https://www.amazon.com/Power-Habit-What-Life-Business/dp/081298160X"
