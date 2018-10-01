@@ -12,17 +12,17 @@ Enjoyed the book. The real-life examples and a good narrative make the reading o
 Strongly recommend for everyone
 
 ## Thoughts
-*25 days and everything will become a habit!* It was my belief for 5+ years. I have started several times making exercises in the morning, waiting for 25 days, and it seems it works, but it doesn't. The one day I skipped an exercise routine -> and it is gone. My habit is gone. I drained my willpower for a month, and in a day of weakness, all my efforts become nothing. I needed to start again, but I didn't want to. So something was wrong...
+*25 days and everything will become a habit!* It was my belief for 5+ years. I have started several times making exercises in the morning, waiting for 25 days, and it seemed it worked, but it didn't. The one day I skipped an exercise routine -> and it was gone. My habit was gone. I was draining my willpower for a month, and in a day of weakness, all my efforts became nothing. I needed to start again, but I didn't want to. So something was wrong...
 
-The book shows how habits works, **the Habit loop**, and on real examples explains the Power of Habit. The real examples made me believe in it, they are the brilliancy of the book. Is it giving you a secret key to be a smart and successful person? Definitely not. It gives only a possibility to understand yourself, the habit part of yourself.
+The book shows how habits work, **the Habit loop**, and on real examples explains the Power of Habit. The real examples made me believe in it, they are the brilliancy of the book. Is it giving you a secret key to be a smart and successful person? Definitely not. It gives only a possibility to understand yourself, the habit part of yourself.
 
-Changing, or creating a new habit is a hard work. It won't be easy, no 25 days, no magic. Only your awareness of yourself, analyses of your habit loops, experiments with routines and search of the cues and rewards(craving rewards) can make it. And of course the first and the most important step. Understanding how habits work.
+Changing, or creating a new habit is hard work. It won't be easy, no 25 days, no magic. Only your awareness of yourself, analyses of your habit loops, experiments with routines and search of the cues and rewards(craving rewards) can make it. And of course the first and the most important step. Understanding how habits work.
 
 Now I have several ideas about my personal habits and things I want to change. But I'm aware of the hard parts. So for now working on change one habit per time is better than nothing.
 
 ### My example:
 
-I work in an office without coolers. So in order to get a cap of water, I need to make a long way to the kitchen. It's a pretty long way because my seat is on the opposite side of the flat. At first, it was an irritation to make the whole way. But during my reading, I noticed that it is a possibility to make exercises several times per day. 
+I work in an office without coolers. So in order to get a cap of water, I need to make a long way to the kitchen. It's a pretty long way because my seat is on the opposite side of the floor. At first, it was annoying to make the whole way. But during my reading, I noticed that it is a possibility to make exercises several times per day. 
 
 So my habit loop was:
 - **Cue** - I want to drink
